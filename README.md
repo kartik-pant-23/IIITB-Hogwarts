@@ -10,5 +10,4 @@ This is going to be fun project for our college students. Thinking of bringing H
 # Expectations
 I expect to create a project that can be put up in front of our college students as a beautiful piece of effort, dedication and learning. And I hope we all learn about making real projects in teams and using git, an important skill. This is going to be a non-profit initiative, although expenses need to be met for which certain ways can be thought of later.
 
--------------------------------------------------------------------------Happy learning folks-----------------------------------------------------------------------------------
--
+Happy learning folks!
