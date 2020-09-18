@@ -1,4 +1,4 @@
 ## Backend
 
-* **Language/Framework- ** nodejs
-* **Database- ** mongoDB
+* **Language/Framework-** nodejs
+* **Database-** mongoDB
