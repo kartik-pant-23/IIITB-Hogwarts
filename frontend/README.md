@@ -1,5 +1,5 @@
 ## Frontend
 
-This file would contain details about the frontend of the project.
+All about frontend part.
 
 * **Language/Framework-** Flutter
