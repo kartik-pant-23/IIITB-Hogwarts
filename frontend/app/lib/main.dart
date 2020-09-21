@@ -1,3 +1,4 @@
+import 'package:app/widgets/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/register.dart';
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       home: homeWidget(),
+      theme: ourTheme(),
     );
   }
 }
