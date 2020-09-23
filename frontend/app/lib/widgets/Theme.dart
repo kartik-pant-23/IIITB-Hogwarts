@@ -31,7 +31,7 @@ ThemeData ourTheme() {
       ),
       title: TextStyle(
         fontFamily: "Harry Potter"
-      )
+      ),
     )
   );
 

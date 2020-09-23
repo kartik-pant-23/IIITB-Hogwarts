@@ -1,7 +1,7 @@
+import 'package:app/screens/login.dart';
 import 'package:app/widgets/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home.dart';
-import 'package:app/screens/register.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,10 +20,10 @@ Widget homeWidget() {
   if(userLoggedIn()) {
     return HomePage();
   } else {
-    return RegisterPage();
+    return LoginPage();
   }
 }
 
 bool userLoggedIn(){
-  return true;
+  return false;
 }
