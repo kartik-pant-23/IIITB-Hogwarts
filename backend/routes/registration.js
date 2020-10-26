@@ -10,6 +10,11 @@ var groupNames = ["Name1","Name2","Name3","Name4"];
 
 //app.use(bodyParser.urlencoded({extended: true}));
 
+/* GET registration page. */
+router.get('/register', function(req, res, next) {
+  res.render('');//add registration form source here
+});
+
 /* register the user in database */
 router.post('/register', function(req, res, next) {
 
@@ -22,7 +27,6 @@ router.post('/register', function(req, res, next) {
     scholar: req.body.scholar,
     password: req.body.password,
     group: groupNames[groupNum],//Decide later the algorithm.. Currently it is random
-    token: ,//Prashant token ka dekh lena
     isVerified: false//develop a email verification route
   });
 
