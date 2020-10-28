@@ -1,24 +1,20 @@
 var express = require('express');
-var router = express.Router();
-const mongoose = require("mongoose");
-//const bodyParser = require("body-parser");
+const router = express.Router();
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
-mongoose.connect("mongodb://localhost:27017/IITB-Hogwarts_DB", {useNewUrlParser: true,useUnifiedTopology: true });
-const User = mongoose.model("User",UserSchema);
+const User = require("../models/user");
 
-var groupNames = ["Name1","Name2","Name3","Name4"];
-
-//app.use(bodyParser.urlencoded({extended: true}));
+var groupNames = ["Name1", "Name2", "Name3", "Name4"];
 
 /* GET registration page. */
-router.get('/register', function(req, res, next) {
-  res.render('');//add registration form source here
+router.get("/register", function (req, res, next) {
+  res.render(""); //add registration form source here
 });
 
 /* register the user in database */
-router.post('/register', function(req, res, next) {
-
-  groupNum=Math.floor(Math.random()*4);
+router.post("/register", function (req, res) {
+  groupNum = Math.floor(Math.random() * 4);
 
   const user = new User({
     firstName: req.body.firstName,
@@ -26,16 +22,41 @@ router.post('/register', function(req, res, next) {
     email: req.body.email,
     scholar: req.body.scholar,
     password: req.body.password,
-    group: groupNames[groupNum],//Decide later the algorithm.. Currently it is random
-    isVerified: false//develop a email verification route
+    group: groupNames[groupNum], //Decide later the algorithm.. Currently it is random
+    isVerified: false,
+    token: crypto.randomBytes(16).toString("hex"),
   });
 
-  user.save(function(err){
-    if(!err){
-        res.redirect("");//Source of page after successful registration
+  user.save(function (err, user) {
+    if (!err) {
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.GMAIL_USERNAME,
+          pass: process.env.GMAIL_PASSWORD,
+        },
+      });
+      const mailOptions = {
+        from: "no-reply@iiitbhowgwarts.com",
+        to: user.email,
+        subject: "Account Verification Token",
+        text:
+          "Hello,\n\n" +
+          "Please verify your account by clicking the link: \nhttp://" +
+          req.headers.host +
+          "/confirmation/" +
+          user.token +
+          ".\n",
+      };
+      transporter.sendMail(mailOptions, function (err) {
+        if (err) {
+          return res.status(500);
+        }
+        res
+          .status(200);
+      });
     }
   });
-
 });
 
 module.exports = router;
