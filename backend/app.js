@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const registrationRouter = require('./routes/registration');
+const groupsRouter = require('./routes/groups');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register',registrationRouter);
+app.use('/groups/:groupName',groupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

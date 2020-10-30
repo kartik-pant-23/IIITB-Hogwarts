@@ -1,11 +1,11 @@
-var express = require('express');
+const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 
 const User = require("../models/user");
 
-var groupNames = ["Name1", "Name2", "Name3", "Name4"];
+const groupNames = ["Name1", "Name2", "Name3", "Name4"];
 
 /* GET registration page. */
 router.get("/register", function (req, res, next) {
