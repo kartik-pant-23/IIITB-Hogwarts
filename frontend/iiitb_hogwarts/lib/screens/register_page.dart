@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
         return null;
       },
       onSaved: (value){
-        _name = value;
+        _name = value.trim();
       },
     );
   }
@@ -70,7 +70,7 @@ class RegisterPage extends StatelessWidget {
         return null;
       },
       onSaved: (value){
-        _email = value;
+        _email = value.trim();
       },
     );
   }
@@ -163,7 +163,7 @@ class RegisterPage extends StatelessWidget {
                               _formKey.currentState.save();
                               bool registerResult = await register(_name, _email, _password, user);
                               if(registerResult) {
-                                navigateTo(HomePage(), context);
+                                navigateTo(WelcomePage(), context);
                               } else {
                                 _scaffoldKey.currentState.showSnackBar(
                                     SnackBar(content: Text('Unknown error occurred!', style: Theme.of(context).textTheme.bodyText1,),
@@ -185,6 +185,6 @@ class RegisterPage extends StatelessWidget {
 
   void navigateTo(Widget widget, BuildContext context){
     Navigator.of(context).pushAndRemoveUntil(
-        SlideLeftRoute(widget: WelcomePage()), (Route<dynamic> route) => false);
+        SlideLeftRoute(widget: widget), (Route<dynamic> route) => false);
   }
 }

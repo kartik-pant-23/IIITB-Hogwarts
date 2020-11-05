@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iiitb_hogwarts/screens/home_page.dart';
 import 'package:iiitb_hogwarts/screens/login_page.dart';
+import 'package:iiitb_hogwarts/screens/show_group.dart';
+import 'package:iiitb_hogwarts/screens/welcome_screen.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';
 import 'package:iiitb_hogwarts/widgets/Theme.dart';
+import 'package:iiitb_hogwarts/widgets/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user.dart';
@@ -18,19 +21,21 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => User()),
       ],
-      child: MaterialApp(
-        title: 'IIITB-Hogwarts',
-        theme: ourTheme(),
-        home: FutureBuilder(
-            future: getUser(),
-            builder: (context, snapshot) {
-              if(snapshot.connectionState == ConnectionState.waiting)
-                return Scaffold(body: Center(child: SizedBox(height: 100, width: 100,
-                  child: SvgPicture.asset('images/ic_default_profile.svg', fit: BoxFit.cover,))));
-              return (snapshot.hasData && snapshot.data) ?HomePage() :LoginPage();
-            }
-        ),
-      ),
+      builder: (context, _) {
+        final User user = Provider.of<User>(context, listen: false);
+        return MaterialApp(
+          title: 'IIITB-Hogwarts',
+          theme: ourTheme(),
+          home: FutureBuilder(
+              future: getUser(user),
+              builder: (context, snapshot) {
+                if(snapshot.connectionState == ConnectionState.waiting)
+                  return SplashScreen();
+                return (snapshot.hasData && snapshot.data) ?HomePage() :LoginPage();
+              }
+          ),
+        );
+      }
     );
   }
 }
