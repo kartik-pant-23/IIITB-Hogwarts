@@ -1,9 +1,7 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iiitb_hogwarts/screens/home_page.dart';
 import 'package:iiitb_hogwarts/screens/login_page.dart';
-import 'package:iiitb_hogwarts/screens/show_group.dart';
-import 'package:iiitb_hogwarts/screens/welcome_screen.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';
 import 'package:iiitb_hogwarts/widgets/Theme.dart';
 import 'package:iiitb_hogwarts/widgets/splash_screen.dart';
@@ -11,7 +9,11 @@ import 'package:provider/provider.dart';
 
 import 'models/user.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Admob.initialize();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
     precacheImage(AssetImage('images/background.jpg'), context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => User()),
+        Provider(create: (context) => User()),
       ],
       builder: (context, _) {
         final User user = Provider.of<User>(context, listen: false);
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
               builder: (context, snapshot) {
                 if(snapshot.connectionState == ConnectionState.waiting)
                   return SplashScreen();
-                return (snapshot.hasData && snapshot.data) ?HomePage() :LoginPage();
+                return (snapshot.hasData && snapshot.data) ?HomePage() :HomePage();
               }
           ),
         );

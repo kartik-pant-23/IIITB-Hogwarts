@@ -44,7 +44,7 @@ class GroupBadgeShadow extends CustomPainter {
     path.arcToPoint(Offset(size.width*9/10, size.height*0.65), radius: Radius.circular(size.height), clockwise: false);
     path.quadraticBezierTo(size.width, size.height/2, size.width*9/10, size.height/10);
     path.quadraticBezierTo(size.width/2, -1*size.height/10, size.width/10, size.height/10);
-    canvas.drawShadow(path, Colors.pink[300], 15, false);
+    canvas.drawShadow(path, Colors.pink[300], 6, false);
   }
 
   @override

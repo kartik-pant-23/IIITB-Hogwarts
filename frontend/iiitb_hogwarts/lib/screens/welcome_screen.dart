@@ -60,8 +60,9 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
             opacity: _headerText,
             child: Consumer<User>(
               builder: (context, user, _) {
-                return Text('Hi ${user.name}!\nWelcome to the wizarding world',
-                  style: Theme.of(context).textTheme.headline5, textScaleFactor: 1.5, textAlign: TextAlign.center,);
+                return Text('Hi ${user.firstName}!\nWelcome to the wizarding world',
+                  style: TextStyle(fontFamily: "Harry Potter", fontSize: 24),
+                  textAlign: TextAlign.center,);
               },
             ),
           ),
@@ -86,9 +87,8 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
       opacity: _titleText1,
       child: Text(
         'Hmm... Let\'s know you first.',
-        style: Theme.of(context).textTheme.headline5,
+        style: TextStyle(fontFamily: 'Harry Potter', fontSize: 24),
         textAlign: TextAlign.center,
-        textScaleFactor: 1.5,
       ),
     );
   }
@@ -98,9 +98,8 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
       opacity: _titleText2,
       child: Text(
         'What drives you more?',
-        style: Theme.of(context).textTheme.headline5,
-        textAlign: TextAlign.center,
-        textScaleFactor: 1.5,
+        style: TextStyle(fontFamily: 'Harry Potter', fontSize: 24),
+        textAlign: TextAlign.center
       ),
     );
   }

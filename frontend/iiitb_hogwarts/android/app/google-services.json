@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "460146125860",
+    "project_id": "iiitb-hogwarts",
+    "storage_bucket": "iiitb-hogwarts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460146125860:android:e25fd0998eb6e5c138fcb1",
+        "android_client_info": {
+          "package_name": "com.example.iiitb_hogwarts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460146125860-c1avq0sqsvggdvkaaaqtve57bv4hvlli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iiitb_hogwarts",
+            "certificate_hash": "5f6da01c4bf17eec92008260f5e2531bafc5df64"
+          }
+        },
+        {
+          "client_id": "460146125860-ufu15nvhrf9q1ndto6npjous4bi0hjug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbTmn552wUjfYS4XKcSn2ktIUJ5XH6FXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460146125860-ufu15nvhrf9q1ndto6npjous4bi0hjug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
