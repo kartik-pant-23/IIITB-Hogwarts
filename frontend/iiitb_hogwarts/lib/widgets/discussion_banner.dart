@@ -7,7 +7,7 @@ class DiscussionBanner extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.all(6),
       decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).accentColor.withOpacity(0.30),
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
               image: NetworkImage(

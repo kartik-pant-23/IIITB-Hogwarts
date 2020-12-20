@@ -15,8 +15,8 @@ class ChatItem extends StatelessWidget {
 
     MainAxisAlignment msgAlignment =
         (type == 1) ? MainAxisAlignment.end : MainAxisAlignment.start;
-    Color containerColor = (type == 1) ? Color(0xFFDF267C) : Colors.transparent;
-    Color textColor = (type == 1) ? Color(0xFFFFFFFF) : Color(0xFFDF267C);
+    Color containerColor = (type == 1) ? Color(0xFFDF267C) : Color(0xFFDF267C).withOpacity(0.2);
+    Color textColor = (type == 1) ? Color(0xFFFFFFFF) : Color(0xFFFFFFFF);
 
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -29,7 +29,7 @@ class ChatItem extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
           decoration: BoxDecoration(
               color: containerColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(24),
               border: Border.all(color: Color(0xFFDF267C), width: 2)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -38,7 +38,7 @@ class ChatItem extends StatelessWidget {
               (type == 0 && !skipHeader)
                   ? Text(chat.name,
                       style: TextStyle(
-                          color: textColor),
+                          color: textColor, fontWeight: FontWeight.bold),
                       textScaleFactor: 1.6)
                   : Container(width: 0),
               Text(

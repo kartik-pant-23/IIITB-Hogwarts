@@ -21,7 +21,7 @@ class Chat {
   int getType() {
     /*String thisUserId = Provider.of<User>(_context).userId;
     return (thisUserId==userId) ?1 :0;*/
-    return 1;
+    return (userId=='akhskabxcywb1921y78sgqsb') ?1 :0;
   }
 
 }

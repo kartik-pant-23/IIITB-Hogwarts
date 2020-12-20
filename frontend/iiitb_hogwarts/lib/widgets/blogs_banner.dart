@@ -12,7 +12,7 @@ class BlogsBanner extends StatelessWidget {
       margin: EdgeInsets.all(8),
       height: double.infinity,
       decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).accentColor.withOpacity(0.30),
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
               image: NetworkImage(

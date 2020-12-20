@@ -161,21 +161,65 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Future<bool> onBackPressed() async {
+      if(selectedFragment!=0) {
+        setState(() {
+          selectedFragment = 0;
+        });
+        return false;
+      }
+      return showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            backgroundColor: Color(0xFF480945),
+            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+            title: Row(
+              children: [
+                Image.asset('images/ic_foreground.png',
+                    width: 32, height: 32),
+                SizedBox(width: 12),
+                Text(
+                  'IIITB Hogwarts',
+                  textScaleFactor: 1.4,
+                )
+              ],
+            ),
+            content: Text('Is that it.. You want to exit the app?'),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: Text('NO')
+              ),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: Text('YES')
+              ),
+            ],
+          ));
+    }
+
     final user = Provider.of<User>(context);
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        elevation: 2,
-        backgroundColor: Color(0xFF480945),
-        title: Text(fragmentTitles[selectedFragment]),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset('images/ic_drawer.png', height: 24, width: 24,),
-          onPressed: () => scaffoldKey.currentState.openDrawer(),
+    return WillPopScope(
+      onWillPop: onBackPressed,
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+          elevation: 4,
+          backgroundColor: Color(0xFF480945),
+          title: Text(fragmentTitles[selectedFragment]),
+          centerTitle: true,
+          leading: IconButton(
+            icon: Image.asset('images/ic_drawer.png', height: 24, width: 24,),
+            onPressed: () => scaffoldKey.currentState.openDrawer(),
+          ),
         ),
+        drawer: drawer(),
+        body: fragments[selectedFragment]
       ),
-      drawer: drawer(),
-      body: fragments[selectedFragment]
     );
   }
 }

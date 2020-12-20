@@ -18,26 +18,27 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     precacheImage(AssetImage('images/background.jpg'), context);
     return MultiProvider(
-      providers: [
-        Provider(create: (context) => User()),
-      ],
-      builder: (context, _) {
-        final User user = Provider.of<User>(context, listen: false);
-        return MaterialApp(
-          title: 'IIITB-Hogwarts',
-          theme: ourTheme(),
-          home: FutureBuilder(
-              future: getUser(user),
-              builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting)
-                  return SplashScreen();
-                return (snapshot.hasData && snapshot.data) ?HomePage() :HomePage();
-              }
-          ),
-        );
-      }
-    );
+        providers: [
+          Provider(create: (context) => User()),
+        ],
+        builder: (context, _) {
+          final User user = Provider.of<User>(context, listen: false);
+          return MaterialApp(
+            title: 'IIITB-Hogwarts',
+            theme: ourTheme(),
+            home: FutureBuilder(
+                future: getUser(user),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return SplashScreen();
+                  return (snapshot.hasData && snapshot.data)
+                      ? HomePage()
+                      : HomePage();
+                }),
+          );
+        });
   }
 }

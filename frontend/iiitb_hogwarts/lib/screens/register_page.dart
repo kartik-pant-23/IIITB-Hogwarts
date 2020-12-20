@@ -49,6 +49,35 @@ class RegisterPage extends StatelessWidget {
       },
     );
   }
+  Widget _buildLastName(){
+    return TextFormField(
+      keyboardType: TextInputType.text,
+      textCapitalization: TextCapitalization.words,
+      decoration: InputDecoration(
+          prefixIcon: Container(margin: EdgeInsets.fromLTRB(4,4,8,4) ,child: CircleAvatar(
+              backgroundColor: Color(0xFFFFFFFF),
+              child: Padding(padding: EdgeInsets.all(6),
+                child:SvgPicture.asset('images/ic_default_profile.svg', fit: BoxFit.cover,),
+              )
+          )),
+          hintText: 'Last name',
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          filled: true,
+          fillColor: Color(0xFFFFFFFF).withOpacity(0.40),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide.none)
+      ),
+      validator: (value){
+        if(value.isEmpty)
+          return 'Field is required';
+        return null;
+      },
+      onSaved: (value){
+        _firstName = value.trim();
+      },
+    );
+  }
   Widget _buildEmail(){
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
@@ -130,6 +159,8 @@ class RegisterPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         _buildFirstName(),
+                        SizedBox(height: 10),
+                        _buildLastName(),
                         SizedBox(height: 10),
                         _buildEmail(),
                         SizedBox(height: 10),
