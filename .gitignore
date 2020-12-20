@@ -1,2 +1,4 @@
 /backend/node_modules
 /frontend/iiitb_hogwarts/lib/utils/important_strings.dart
+/backend/.env
+.vscode
