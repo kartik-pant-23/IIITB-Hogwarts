@@ -12,14 +12,15 @@ import 'home_page.dart';
 class RegisterPage extends StatelessWidget {
 
   //Parameters
-  String _name;
+  String _firstName;
+  String _lastName = "";
   String _email;
   String _password;
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Build each form field
-  Widget _buildName(){
+  Widget _buildFirstName(){
     return TextFormField(
       keyboardType: TextInputType.text,
       textCapitalization: TextCapitalization.words,
@@ -30,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                 child:SvgPicture.asset('images/ic_default_profile.svg', fit: BoxFit.cover,),
               )
           )),
-          hintText: 'Name',
+          hintText: 'First name',
           contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
           filled: true,
           fillColor: Color(0xFFFFFFFF).withOpacity(0.40),
@@ -40,11 +41,11 @@ class RegisterPage extends StatelessWidget {
       ),
       validator: (value){
         if(value.isEmpty)
-          return 'Name is required';
+          return 'Field is required';
         return null;
       },
       onSaved: (value){
-        _name = value;
+        _firstName = value.trim();
       },
     );
   }
@@ -70,7 +71,7 @@ class RegisterPage extends StatelessWidget {
         return null;
       },
       onSaved: (value){
-        _email = value;
+        _email = value.trim();
       },
     );
   }
@@ -128,7 +129,7 @@ class RegisterPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        _buildName(),
+                        _buildFirstName(),
                         SizedBox(height: 10),
                         _buildEmail(),
                         SizedBox(height: 10),
@@ -161,15 +162,18 @@ class RegisterPage extends StatelessWidget {
                                 return;
                               }
                               _formKey.currentState.save();
-                              bool registerResult = await register(_name, _email, _password, user);
-                              if(registerResult) {
-                                navigateTo(HomePage(), context);
+                              //bool registerResult = await register(_name, _email, _password, user);
+                              Future.delayed(Duration(milliseconds: 1400), (){
+                                navigateTo(WelcomePage(), context);
+                              });
+                              /*if(registerResult) {
+                                navigateTo(WelcomePage(), context);
                               } else {
                                 _scaffoldKey.currentState.showSnackBar(
                                     SnackBar(content: Text('Unknown error occurred!', style: Theme.of(context).textTheme.bodyText1,),
                                       backgroundColor: Theme.of(context).accentColor,)
                                 );
-                              }
+                              }*/
                             },
                           ),
                         )
@@ -185,6 +189,6 @@ class RegisterPage extends StatelessWidget {
 
   void navigateTo(Widget widget, BuildContext context){
     Navigator.of(context).pushAndRemoveUntil(
-        SlideLeftRoute(widget: WelcomePage()), (Route<dynamic> route) => false);
+        SlideLeftRoute(widget: widget), (Route<dynamic> route) => false);
   }
 }

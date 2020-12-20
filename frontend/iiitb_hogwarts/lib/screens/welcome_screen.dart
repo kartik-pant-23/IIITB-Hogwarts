@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iiitb_hogwarts/models/user.dart';
+import 'package:iiitb_hogwarts/screens/show_group.dart';
 import 'package:iiitb_hogwarts/widgets/background_image.dart';
+import 'package:iiitb_hogwarts/widgets/transition.dart';
 import 'package:provider/provider.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -34,7 +36,7 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
     _titleText1 = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
     _titleText2 = AnimationController(vsync: this, duration: Duration(milliseconds: 600));
     _options = AnimationController(vsync: this, duration: Duration(milliseconds: 50));
-    _icHat.forward();
+    Timer(Duration(milliseconds: 200), () {_icHat.forward();});
     Timer(Duration(seconds: 1), () {_headerText.forward();});
     Timer(Duration(seconds: 3), () {_titleText1.forward();});
     Timer(Duration(seconds: 4), () {_titleText2.forward();});
@@ -44,7 +46,8 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
 
   @override
   void dispose() {
-    _titleText1.dispose();
+    _titleText1.dispose(); _titleText2.dispose();
+    _headerText.dispose(); _icHat.dispose(); _options.dispose();
     super.dispose();
   }
 
@@ -57,8 +60,9 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
             opacity: _headerText,
             child: Consumer<User>(
               builder: (context, user, _) {
-                return Text('Hi ${user.name}!\nWelcome to the wizarding world',
-                  style: Theme.of(context).textTheme.headline5, textScaleFactor: 1.5, textAlign: TextAlign.center,);
+                return Text('Hi ${user.firstName}!\nWelcome to the wizarding world',
+                  style: TextStyle(fontFamily: "Harry Potter", fontSize: 24),
+                  textAlign: TextAlign.center,);
               },
             ),
           ),
@@ -83,9 +87,8 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
       opacity: _titleText1,
       child: Text(
         'Hmm... Let\'s know you first.',
-        style: Theme.of(context).textTheme.headline5,
+        style: TextStyle(fontFamily: 'Harry Potter', fontSize: 24),
         textAlign: TextAlign.center,
-        textScaleFactor: 1.5,
       ),
     );
   }
@@ -95,15 +98,13 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
       opacity: _titleText2,
       child: Text(
         'What drives you more?',
-        style: Theme.of(context).textTheme.headline5,
-        textAlign: TextAlign.center,
-        textScaleFactor: 1.5,
+        style: TextStyle(fontFamily: 'Harry Potter', fontSize: 24),
+        textAlign: TextAlign.center
       ),
     );
   }
 
   Widget _optionsWidget() {
-    print('=====Rebuilt=====');
     return FadeTransition(
       opacity: _options,
       child: Column(
@@ -117,7 +118,7 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
                     .of(context)
                     .accentColor;
               });
-              if(_currentOption==2) {}
+              if(_currentOption==2) { navigateToShowGroup(); }
               else {
                 Timer(Duration(seconds: 1), () {
                   setState(() {
@@ -151,7 +152,7 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
                     .of(context)
                     .accentColor;
               });
-              if(_currentOption==2){}
+              if(_currentOption==2){ navigateToShowGroup(); }
               else {
                 Timer(Duration(seconds: 1), () {
                   _absorbing = false;
@@ -185,7 +186,7 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
                     .of(context)
                     .accentColor;
               });
-              if(_currentOption==2){}
+              if(_currentOption==2){ navigateToShowGroup(); }
               else {
                 Timer(Duration(seconds: 1), () {
                   setState(() {
@@ -244,5 +245,14 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
         ),
       ),
     );
+  }
+
+  void navigateToShowGroup()  {
+    Timer(Duration(seconds: 1),() {
+      //Navigator.of(context).pushReplacement(SlideLeftRoute(widget: ShowGroup()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+        return ShowGroup();
+      }));
+    });
   }
 }

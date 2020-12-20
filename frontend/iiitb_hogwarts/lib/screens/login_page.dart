@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
         return null;
       },
       onSaved: (value){
-        _email = value;
+        _email = value.trim();
       },
     );
   }

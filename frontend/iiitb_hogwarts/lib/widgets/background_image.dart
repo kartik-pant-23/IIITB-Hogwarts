@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BackgroundImage extends StatelessWidget {
-  Widget child;
-  BackgroundImage({this.child});
+  final Widget child;
+  BackgroundImage({@required this.child});
   final ImageProvider backgroundImage = AssetImage('images/background.jpg');
   @override
   Widget build(BuildContext context) {

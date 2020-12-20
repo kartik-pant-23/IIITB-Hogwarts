@@ -17,9 +17,9 @@ Future<bool> login(String email, String password, User user) async {
     if(res.statusCode != 200) return null;
     var responseBody = jsonDecode(res.body);
     print(responseBody.toString());
-    user.setUserDetails(responseBody['user']);
+    user.fromJson(responseBody['user']);
     var pref = await SharedPreferences.getInstance();
-    bool prefResult = await pref.setString('userId', user.id);
+    bool prefResult = await pref.setString('userId', user.userId);
     return prefResult;
   } catch(error) {
     print(error.toString());
@@ -27,21 +27,23 @@ Future<bool> login(String email, String password, User user) async {
   }
 }
 
-Future<bool> register(String name, String email, String password, User user) async {
+Future<bool> register(String firstName, String lastName, String email, String password, User user) async {
   Uri uri = Uri.http(BASE_URL, REGISTER);
   Map body = {
-    'name': name,
+    'firstName': firstName,
+    'lastName': lastName,
     'email': email,
     'password': password
   };
   try {
     var res = await http.post(uri, body: body);
-    if(res.statusCode != 200) return null;
+    print(res.body);
+    if(res.statusCode != 200) return false;
     var responseBody = jsonDecode(res.body);
-    user.setUserDetails(responseBody['user']);
+    user.fromJson(responseBody['user']);
     var pref = await SharedPreferences.getInstance();
-    print('${user.id} ===== ${user.name}');
-    bool prefResult = await pref.setString('userId', user.id);
+    print('${user.userId} ===== ${user.firstName}');
+    bool prefResult = await pref.setString('userId', user.userId);
     return prefResult;
   } catch(error) {
     print(error.toString());

@@ -19,20 +19,9 @@ ThemeData ourTheme() {
     primarySwatch: MaterialColor(0xFF40184B, _swatchColor),
     accentColor: Color(0xFFDF267C),
     primaryColor: Color(0xFF40184B),
-    scaffoldBackgroundColor: _swatchColor[200],
+    scaffoldBackgroundColor: Color(0xFF480945),
     brightness: Brightness.dark,
-    textTheme: TextTheme(
-      bodyText1: TextStyle(
-        fontFamily: "Poppins"
-      ),
-      bodyText2: TextStyle(
-        fontFamily: "Poppins",
-        fontWeight: FontWeight.w700
-      ),
-      headline5: TextStyle(
-        fontFamily: "Harry Potter"
-      ),
-    )
+    fontFamily: "Poppins",
   );
 
   return data;

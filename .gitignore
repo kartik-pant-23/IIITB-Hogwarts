@@ -1,4 +1,8 @@
 /backend/node_modules
 /frontend/iiitb_hogwarts/lib/utils/important_strings.dart
+<<<<<<< HEAD
 /backend/.env
 .vscode
+=======
+.idea
+>>>>>>> f1e88f47ba66c2fcc4df3df9f3623b75aa95d3fc
