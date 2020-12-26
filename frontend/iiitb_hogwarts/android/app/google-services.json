@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "460146125860",
-    "project_id": "iiitb-hogwarts",
-    "storage_bucket": "iiitb-hogwarts.appspot.com"
+    "project_number": "585518880605",
+    "project_id": "iiitb-hogwarts-2020",
+    "storage_bucket": "iiitb-hogwarts-2020.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:460146125860:android:e25fd0998eb6e5c138fcb1",
+        "mobilesdk_app_id": "1:585518880605:android:6fc4cc41dd9f351d367ab4",
         "android_client_info": {
           "package_name": "com.example.iiitb_hogwarts"
         }
       },
       "oauth_client": [
         {
-          "client_id": "460146125860-c1avq0sqsvggdvkaaaqtve57bv4hvlli.apps.googleusercontent.com",
+          "client_id": "585518880605-ni5p8j7kc5n30fsh9nhbmbdpk3ha219g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.iiitb_hogwarts",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "460146125860-ufu15nvhrf9q1ndto6npjous4bi0hjug.apps.googleusercontent.com",
+          "client_id": "585518880605-fjfckpkotgr56gott95h3ce8uan7v7s4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbTmn552wUjfYS4XKcSn2ktIUJ5XH6FXs"
+          "current_key": "AIzaSyBhEMYBoo66dKZ8LK4BpvQEaZ9GXT-2BV4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "460146125860-ufu15nvhrf9q1ndto6npjous4bi0hjug.apps.googleusercontent.com",
+              "client_id": "585518880605-fjfckpkotgr56gott95h3ce8uan7v7s4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

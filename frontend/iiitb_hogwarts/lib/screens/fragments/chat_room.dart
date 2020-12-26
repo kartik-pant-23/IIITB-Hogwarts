@@ -71,7 +71,7 @@ class _ChatRoomState extends State<ChatRoom> {
                   return ListView.builder(
                       reverse: true,
                       padding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                       itemCount: msgList.length,
                       itemBuilder: (context, index) {
                         return Column(

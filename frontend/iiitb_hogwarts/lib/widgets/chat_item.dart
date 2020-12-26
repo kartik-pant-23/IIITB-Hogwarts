@@ -25,8 +25,8 @@ class ChatItem extends StatelessWidget {
         Container(
           constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width * 0.80),
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-          margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
           decoration: BoxDecoration(
               color: containerColor,
               borderRadius: BorderRadius.circular(24),
@@ -38,7 +38,7 @@ class ChatItem extends StatelessWidget {
               (type == 0 && !skipHeader)
                   ? Text(chat.name,
                       style: TextStyle(
-                          color: textColor, fontWeight: FontWeight.bold),
+                          color: Color(0xFFDF267C), fontWeight: FontWeight.bold),
                       textScaleFactor: 1.6)
                   : Container(width: 0),
               Text(
