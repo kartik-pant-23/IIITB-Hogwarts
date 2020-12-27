@@ -35,8 +35,9 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.iiitb_hogwarts"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -54,8 +55,23 @@ flutter {
     source '../..'
 }
 
+repositories {
+    jcenter()
+
+    maven { url  "https://adcolony.bintray.com/AdColony" }
+    maven { url "https://chartboostmobile.bintray.com/Chartboost" }
+}
+
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.android.gms:play-services-ads'
     implementation 'com.google.firebase:firebase-analytics'
+
+    implementation 'com.google.android.ads:mediation-test-suite:1.5.0'
+
+    implementation 'com.google.ads.mediation:adcolony:4.3.0.0'
+    implementation 'com.google.ads.mediation:chartboost:8.2.0.0'
+    implementation 'com.google.ads.mediation:facebook:6.2.0.0'
 }

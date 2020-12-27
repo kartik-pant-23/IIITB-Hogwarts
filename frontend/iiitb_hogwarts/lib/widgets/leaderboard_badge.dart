@@ -21,8 +21,15 @@ class LeaderBoardBadge extends StatelessWidget {
             fit: BoxFit.cover
           ),
         ),
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                  begin: Alignment.centerRight, end: Alignment.centerLeft,
+                  colors: [Colors.transparent, Colors.black54]
+              )
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,

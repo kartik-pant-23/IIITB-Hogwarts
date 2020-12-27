@@ -19,7 +19,7 @@ class Dashboard extends StatelessWidget {
           children: [
             SizedBox(height: 12),
             Text(
-              'CURRENT LEADERBOARD',
+              'CURRENT LEADERBOARD', style: TextStyle(fontWeight: FontWeight.bold),
             ),
             LeaderBoardBadge(
               groupCode: 0,
@@ -40,14 +40,14 @@ class Dashboard extends StatelessWidget {
               alignment: Alignment.center,
               child: AdmobBanner(
                 adUnitId: AdmobAds().getBannerId(),
-                adSize: AdmobBannerSize.BANNER,
+                adSize: AdmobBannerSize.LARGE_BANNER,
               ),
             ),
             SizedBox(
               height: 16,
             ),
             Text(
-              'BLOGS FROM AMONG US',
+              'BLOGS FROM AMONG US', style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Container(
               height: 200,
@@ -63,7 +63,7 @@ class Dashboard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'JOIN THE ANONYMOUS DISCUSSION',
+              'JOIN THE ANONYMOUS DISCUSSION', style: TextStyle(fontWeight: FontWeight.bold),
             ),
             DiscussionBanner(),
             SizedBox(
@@ -72,14 +72,14 @@ class Dashboard extends StatelessWidget {
               alignment: Alignment.center,
               child: AdmobBanner(
                 adUnitId: AdmobAds().getBannerId(),
-                adSize: AdmobBannerSize.LARGE_BANNER,
+                adSize: AdmobBannerSize.MEDIUM_RECTANGLE,
               ),
             ),
             SizedBox(
               height: 16,
             ),
             Text(
-              'OFFICIAL WEBSITE',
+              'OFFICIAL WEBSITE', style: TextStyle(fontWeight: FontWeight.bold),
             ),
             WebsiteBanner(),
             SizedBox(height: 16),
