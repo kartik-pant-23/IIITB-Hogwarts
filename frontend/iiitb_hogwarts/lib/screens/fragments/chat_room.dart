@@ -6,6 +6,7 @@ import 'package:iiitb_hogwarts/models/chat.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';
 import 'package:iiitb_hogwarts/widgets/chat_item.dart';
 import 'package:iiitb_hogwarts/widgets/group_screen_header.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatRoom extends StatefulWidget {
   @override
@@ -20,14 +21,28 @@ class _ChatRoomState extends State<ChatRoom> {
   Stream msgStream;
   StreamController controller;
 
+  IO.Socket socket = IO.io(
+    'http://192.168.18.8:3000',
+    <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+      'forceNew': true,
+    },
+  );
+
   @override
   void initState() {
+    socket.emit('joinRoom', 'Kartik');
+
     Chat chat1 = Chat(context: context);
     chat1.fromJson({
       'userId': 'akhskabxcywb1921y78sgqsb',
       'name': 'Kartik',
       'message': 'Routes kbb bnake doge be??'
     });
+
+    //connectChatServer();
+
     chatData.add(chat1);
     chat1 = Chat(context: context);
     chat1.fromJson({
@@ -48,8 +63,24 @@ class _ChatRoomState extends State<ChatRoom> {
     super.initState();
   }
 
+  void connectChatServer() {
+    try {
+      String chatUrl = 'http://192.168.18.8:3000';
+      print("Tried connecting $chatUrl");
+      IO.Socket socket = IO.io(chatUrl, <String, dynamic>{
+        'transports': ['websocket'],
+        'autoConnect': false,
+      });
+      socket.connect();
+      socket.emit('/test', 'test');
+    }catch(e) {
+      print("SocketConnection: "+e.toString());
+    }
+  }
+
   @override
   void dispose() {
+    socket.close();
     controller.close();
     super.dispose();
   }
