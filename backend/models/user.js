@@ -36,7 +36,15 @@ const UserSchema = new Schema({
     isVerified: {
         type: Boolean,
         default: false
-    }
+    },
+    about: { type: String },
+    id_facebook: { type: String },
+    id_instagram: { type: String },
+    id_linkedin: { type: String },
+    id_github: { type: String },
+    id_twitter: { type: String },
+    id_youtube: { type: String },
+    id_personal: { type: String },
 })
 
 
