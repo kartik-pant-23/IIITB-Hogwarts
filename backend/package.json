@@ -15,8 +15,12 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.11",
     "morgan": "~1.9.1",
     "nodemailer": "^6.4.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
