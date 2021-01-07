@@ -5,21 +5,13 @@ const saltRounds = 2;
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
+    name: {
         type: String,
         required: true
     },
     email: {
         type: String,
         required: true
-    },
-    scholar: {
-        type: String,
-        required: true,
     },
     password: {
         type: String,
@@ -37,6 +29,7 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    score: { type: Number, default: 0 },
     about: { type: String },
     id_facebook: { type: String },
     id_instagram: { type: String },

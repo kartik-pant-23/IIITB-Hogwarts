@@ -9,7 +9,7 @@ const groupNames = ["Name1", "Name2", "Name3", "Name4"];
 
 /* GET registration page. */
 router.get("/register", function (req, res, next) {
-  res.render(""); //add registration form source here
+  res.send("Register route"); //add registration form source here
 });
 
 /* register the user in database */

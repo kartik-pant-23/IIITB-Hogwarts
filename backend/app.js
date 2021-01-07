@@ -13,7 +13,14 @@ const groupsRouter = require('./routes/groups');
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/IITB-Hogwarts_DB", {useNewUrlParser: true,useUnifiedTopology: true });
+var db_url = "DATABASE-URL <DBNAME><iiib_hogwarts>"
+mongoose.connect(db_url, {useNewUrlParser: true,useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
+.then((docs) => {
+  console.log("Db connection successful!")
+})
+.catch((error) => {
+  console.log('Db connection failed!')
+});
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -24,14 +31,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({extended: true}));
 // app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.send('You reached the place-IIITB Hogwarts')
+});
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register',registrationRouter);
-app.use('/groups/:groupName',groupsRouter);
+app.use('/groups',groupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,7 +56,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
 });
 
 module.exports = app;
