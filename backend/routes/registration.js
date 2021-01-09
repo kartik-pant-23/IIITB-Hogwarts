@@ -2,25 +2,29 @@ const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const mongoose = require('mongoose');
 
 const User = require("../models/user");
 
-const groupNames = ["Name1", "Name2", "Name3", "Name4"];
+const groupNames = [
+  mongoose.Types.ObjectId("5ff7359e2146903eb88f59fb"),
+  mongoose.Types.ObjectId("5ff73650af75fa4714ac6577"),
+  mongoose.Types.ObjectId("5ff7368baf75fa4714ac6578"),
+  mongoose.Types.ObjectId("5ff736c5af75fa4714ac6579")
+];
 
 /* GET registration page. */
-router.get("/register", function (req, res, next) {
+router.get("/", function (req, res, next) {
   res.send("Register route"); //add registration form source here
 });
 
 /* register the user in database */
-router.post("/register", function (req, res) {
-  groupNum = Math.floor(Math.random() * 4);
+router.post("/", function (req, res) {
+  groupNum = Math.floor(Math.random() % 4);
 
   const user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    name: req.body.name,
     email: req.body.email,
-    scholar: req.body.scholar,
     password: req.body.password,
     group: groupNames[groupNum], //Decide later the algorithm.. Currently it is random
     isVerified: false,
