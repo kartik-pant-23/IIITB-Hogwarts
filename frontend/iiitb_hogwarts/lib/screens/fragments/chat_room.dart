@@ -34,8 +34,7 @@ class _ChatRoomState extends State<ChatRoom> {
   void initState() {
     socket.emit('joinRoom', 'Kartik');
 
-    Chat chat1 = Chat(context: context);
-    chat1.fromJson({
+    Chat chat1 = Chat.fromJson({
       'userId': 'akhskabxcywb1921y78sgqsb',
       'name': 'Kartik',
       'message': 'Routes kbb bnake doge be??'
@@ -44,15 +43,13 @@ class _ChatRoomState extends State<ChatRoom> {
     //connectChatServer();
 
     chatData.add(chat1);
-    chat1 = Chat(context: context);
-    chat1.fromJson({
+    chat1 = Chat.fromJson({
       'userId': 'akhskabxcywb1921y78',
       'name': 'Prashant',
       'message': 'Aise immediate nhi sochein hn.. sochenge.'
     });
     chatData.add(chat1);
-    chat1 = Chat(context: context);
-    chat1.fromJson({
+    chat1 = Chat.fromJson({
       'userId': 'akhskabxcywb19218',
       'name': 'Tushar',
       'message': 'Egjaktly!!'
@@ -157,8 +154,7 @@ class _ChatRoomState extends State<ChatRoom> {
                         color: Color(0xFFDF267C)),
                     onTap: () {
                       if(textController.text!=null && textController.text.trim()!='') {
-                        Chat chat = Chat(context: context);
-                        chat.fromJson({
+                        Chat chat = Chat.fromJson({
                           'userId': 'akhskabxcywb1921y78sgqsb',
                           'name': 'Kartik',
                           'message': textController.text.trim()

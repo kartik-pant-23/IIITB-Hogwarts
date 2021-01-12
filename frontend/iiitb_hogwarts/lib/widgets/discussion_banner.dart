@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iiitb_hogwarts/models/discussion.dart';
 
 class DiscussionBanner extends StatelessWidget {
+
+  final Discussion discussion;
+
+  DiscussionBanner({@required this.discussion});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,9 +16,14 @@ class DiscussionBanner extends StatelessWidget {
           color: Theme.of(context).accentColor.withOpacity(0.30),
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
-              image: NetworkImage(
-                  'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201902/teen-depression-suicide_0.jpeg?cNl1tNTXBhHH46Z08AZxD1fXXa.OxH3b'),
-              fit: BoxFit.fill)),
+              image: NetworkImage(discussion.bannerUrl),
+              fit: BoxFit.fill),
+          boxShadow: [BoxShadow(
+              color: Color(0x55000000),
+              offset: Offset(4,4),
+              blurRadius: 4
+          )]
+      ),
       child: AspectRatio(
         aspectRatio: 4 / 3,
         child: Container(
@@ -26,19 +37,10 @@ class DiscussionBanner extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [Colors.transparent, Colors.black87])),
           alignment: Alignment.bottomLeft,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'How big a role does college have on our future!',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                '63 people already joined!',
-              )
-            ],
+          child: Text(
+            discussion.title,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: 1.5,
           ),
         ),
       ),

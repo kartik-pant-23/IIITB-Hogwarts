@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:iiitb_hogwarts/models/home_page_data.dart';
 import 'package:iiitb_hogwarts/screens/home_page.dart';
 import 'package:iiitb_hogwarts/screens/login_page.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';
@@ -22,13 +23,14 @@ class MyApp extends StatelessWidget {
     precacheImage(AssetImage('images/background.jpg'), context);
     return MultiProvider(
         providers: [
-          Provider(create: (context) => User()),
+          Provider(create: (context) => User())
         ],
         builder: (context, _) {
           final User user = Provider.of<User>(context, listen: false);
           return MaterialApp(
             title: 'IIITB-Hogwarts',
             theme: ourTheme(),
+            debugShowCheckedModeBanner: false,
             home: FutureBuilder(
                 future: getUser(user),
                 builder: (context, snapshot) {

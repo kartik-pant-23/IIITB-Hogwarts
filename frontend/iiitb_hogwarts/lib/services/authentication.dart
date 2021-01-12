@@ -17,7 +17,7 @@ Future<bool> login(String email, String password, User user) async {
     if(res.statusCode != 200) return null;
     var responseBody = jsonDecode(res.body);
     print(responseBody.toString());
-    user.fromJson(responseBody['user']);
+    user = User.fromJson(responseBody['user']);
     var pref = await SharedPreferences.getInstance();
     bool prefResult = await pref.setString('userId', user.userId);
     return prefResult;
@@ -40,9 +40,8 @@ Future<bool> register(String firstName, String lastName, String email, String pa
     print(res.body);
     if(res.statusCode != 200) return false;
     var responseBody = jsonDecode(res.body);
-    user.fromJson(responseBody['user']);
+    user = User.fromJson(responseBody['user']);
     var pref = await SharedPreferences.getInstance();
-    print('${user.userId} ===== ${user.firstName}');
     bool prefResult = await pref.setString('userId', user.userId);
     return prefResult;
   } catch(error) {

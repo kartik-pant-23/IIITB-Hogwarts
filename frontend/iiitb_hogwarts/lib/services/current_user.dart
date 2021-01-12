@@ -13,7 +13,7 @@ Future<bool> getUser(User user) async {
     Uri uri = Uri.http(BASE_URL, 'users/$id');
     var res = await http.get(uri);
     if(res.statusCode != 200) return false;
-    user.fromJson(jsonDecode(res.body));
+    user = User.fromJson(jsonDecode(res.body));
     return true;
   }
   return false;

@@ -24,7 +24,12 @@ class WebsiteBanner extends StatelessWidget {
                     'https://iiitbhopal.ac.in/Design/Banner/Slide1.jpg'
                 ),
                 fit: BoxFit.fill
-            )
+            ),
+            boxShadow: [BoxShadow(
+                color: Color(0x55000000),
+                offset: Offset(4,4),
+                blurRadius: 4
+            )]
         ),
         child: AspectRatio(
           aspectRatio: 4/3,
@@ -47,10 +52,11 @@ class WebsiteBanner extends StatelessWidget {
                 Text(
                   'IIIT Bhopal',
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 20),
+                  textScaleFactor: 1.5,
                 ),
                 Text(
-                    'Visit the official website'
+                  'Visit the official website',
+                  textScaleFactor: 1,
                 )
               ],
             ),

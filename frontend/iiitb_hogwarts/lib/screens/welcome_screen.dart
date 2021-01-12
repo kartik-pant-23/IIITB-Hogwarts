@@ -60,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage> with TickerProviderStateMixin
             opacity: _headerText,
             child: Consumer<User>(
               builder: (context, user, _) {
-                return Text('Hi ${user.firstName}!\nWelcome to the wizarding world',
+                return Text('Hi ${user.name.split(' ')[0]}!\nWelcome to the wizarding world',
                   style: TextStyle(fontFamily: "Harry Potter", fontSize: 24),
                   textAlign: TextAlign.center,);
               },

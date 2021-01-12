@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/chat.dart';
+import 'package:iiitb_hogwarts/models/user.dart';
+import 'package:provider/provider.dart';
 
 class ChatItem extends StatelessWidget {
   final Chat chat;
@@ -11,7 +13,7 @@ class ChatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     if (chat.userId == null) return Container();
 
-    int type = chat.getType();
+    int type = chat.getType(Provider.of<User>(context).userId);
 
     MainAxisAlignment msgAlignment =
         (type == 1) ? MainAxisAlignment.end : MainAxisAlignment.start;

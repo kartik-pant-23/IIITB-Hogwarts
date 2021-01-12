@@ -23,11 +23,16 @@ class BlogsBanner extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
             color: Theme.of(context).accentColor.withOpacity(0.30),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(4),
             image: DecorationImage(
                 image: NetworkImage(blog.bannerUrl),
                 fit: BoxFit.fill,
-            )
+            ),
+          boxShadow: [BoxShadow(
+            color: Color(0x55000000),
+            offset: Offset(4,4),
+            blurRadius: 4
+          )]
         ),
         child: AspectRatio(
           aspectRatio: 16/9,
@@ -35,7 +40,7 @@ class BlogsBanner extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(4),
               gradient: LinearGradient(
                 begin: Alignment.topCenter, end: Alignment.bottomCenter,
                 colors: [Colors.transparent, Colors.black87]
@@ -50,11 +55,12 @@ class BlogsBanner extends StatelessWidget {
                 Text(
                   blog.blogTitle,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 20),
+                  textScaleFactor: 1.5,
                 ),
                 Text(
                   '${blog.authorName} | ${blog.authorYear}',
-                  overflow: TextOverflow.ellipsis
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 1,
                 )
               ],
             ),

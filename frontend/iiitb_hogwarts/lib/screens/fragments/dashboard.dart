@@ -1,16 +1,20 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/blog.dart';
+import 'package:iiitb_hogwarts/models/home_page_data.dart';
 import 'package:iiitb_hogwarts/services/admob.dart';
-import 'package:iiitb_hogwarts/utils/important_strings.dart';
 import 'package:iiitb_hogwarts/widgets/blogs_banner.dart';
 import 'package:iiitb_hogwarts/widgets/discussion_banner.dart';
 import 'package:iiitb_hogwarts/widgets/leaderboard_badge.dart';
 import 'package:iiitb_hogwarts/widgets/website_banner.dart';
+import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    HomePageData data = HomePageData();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: SingleChildScrollView(
@@ -19,19 +23,12 @@ class Dashboard extends StatelessWidget {
           children: [
             SizedBox(height: 12),
             Text(
-              'CURRENT LEADERBOARD', style: TextStyle(fontWeight: FontWeight.bold),
+              'CURRENT LEADERBOARD',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            LeaderBoardBadge(
-              groupCode: 0,
-            ),
-            LeaderBoardBadge(
-              groupCode: 1,
-            ),
-            LeaderBoardBadge(
-              groupCode: 2,
-            ),
-            LeaderBoardBadge(
-              groupCode: 3,
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: data.groups.map<Widget>((group) => LeaderBoardBadge(group: group)).toList(),
             ),
             SizedBox(
               height: 16,
@@ -47,15 +44,16 @@ class Dashboard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'BLOGS FROM AMONG US', style: TextStyle(fontWeight: FontWeight.bold),
+              'BLOGS FROM AMONG US',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Container(
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: data.blogs.length,
                 itemBuilder: (context, index) {
-                  return BlogsBanner(blog: Blog());
+                  return BlogsBanner(blog: data.blogs[index]);
                 },
               ),
             ),
@@ -63,12 +61,14 @@ class Dashboard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'JOIN THE ANONYMOUS DISCUSSION', style: TextStyle(fontWeight: FontWeight.bold),
+              'JOIN THE ANONYMOUS DISCUSSION',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            DiscussionBanner(),
+            DiscussionBanner(discussion: data.discussion),
             SizedBox(
               height: 16,
-            ),Align(
+            ),
+            Align(
               alignment: Alignment.center,
               child: AdmobBanner(
                 adUnitId: AdmobAds().getBannerId(),
@@ -79,7 +79,8 @@ class Dashboard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'OFFICIAL WEBSITE', style: TextStyle(fontWeight: FontWeight.bold),
+              'OFFICIAL WEBSITE',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             WebsiteBanner(),
             SizedBox(height: 16),

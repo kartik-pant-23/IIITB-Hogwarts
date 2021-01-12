@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:iiitb_hogwarts/models/home_page_data.dart';
 import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:iiitb_hogwarts/screens/fragments/about_the_app.dart';
 import 'package:iiitb_hogwarts/screens/fragments/about_the_makers.dart';
@@ -11,6 +14,7 @@ import 'package:iiitb_hogwarts/screens/fragments/profile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,8 +30,6 @@ class _HomePageState extends State<HomePage> {
     AboutTheMakers(),
     AboutTheApp()
   ];
-
-  int selectedFragment = 0;
 
   final List<String> fragmentTitles = [
     'Dashboard',
@@ -50,33 +52,59 @@ class _HomePageState extends State<HomePage> {
     Icons.alternate_email_rounded,
   ];
 
-  final Color primary = Color(0xFF480945), accent = Color(0xFFDF267C);
+  final Color primary = Color(0xFF480945),
+      accent = Color(0xFFDF267C);
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int selectedFragment = 0;
+  StreamController tabController;
+  Stream tabs;
+
+  HomePageData data = HomePageData();
+
+  @override
+  void initState() {
+    tabController = StreamController();
+    tabs = tabController.stream.asBroadcastStream();
+    tabController.add(0);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
 
     Widget drawerTile({@required int index}) {
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedFragment = index;
-          });
-          Navigator.of(context).pop();
-        },
-        child: ListTile(
-          selected: index == selectedFragment,
-          tileColor: primary,
-          selectedTileColor: accent,
-          title: Text(
-            fragmentTitles[index],
-            style: TextStyle(color: Colors.white),
-          ),
-          leading: (index==7)
-              ?Image.asset('images/ic_foreground.png', height: 24, width: 24)
-              :Icon(fragmentIcons[index], color: Colors.white)
-        ),
+      return StreamBuilder(
+        stream: tabs,
+        initialData: selectedFragment,
+        builder: (context, snapshot) {
+          return GestureDetector(
+            onTap: () {
+              selectedFragment = index;
+              tabController.add(selectedFragment);
+              Navigator.of(context).pop();
+            },
+            child: ListTile(
+                selected: index == selectedFragment,
+                tileColor: primary,
+                selectedTileColor: accent,
+                title: Text(
+                  fragmentTitles[index],
+                  style: TextStyle(color: Colors.white),
+                ),
+                leading: (index == 7)
+                    ? Image.asset('images/ic_foreground.png', height: 24, width: 24)
+                    : Icon(fragmentIcons[index], color: Colors.white)
+            ),
+          );
+        }
       );
     }
 
@@ -109,7 +137,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Divider(
-                        color: Theme.of(context).accentColor.withOpacity(0.5)),
+                        color: Theme
+                            .of(context)
+                            .accentColor
+                            .withOpacity(0.5)),
                     SizedBox(height: 6),
                     Text(
                       'NAVIGATE TO',
@@ -149,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                         leading:
-                            Icon(Icons.logout, color: Colors.white),
+                        Icon(Icons.logout, color: Colors.white),
                       ),
                     )
                   ],
@@ -162,63 +193,96 @@ class _HomePageState extends State<HomePage> {
     }
 
     Future<bool> onBackPressed() async {
-      if(selectedFragment!=0) {
-        setState(() {
-          selectedFragment = 0;
-        });
+      if (selectedFragment != 0) {
+        selectedFragment = 0;
+        tabController.add(selectedFragment);
         return false;
       }
       return showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            backgroundColor: Color(0xFF480945),
-            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-            title: Row(
-              children: [
-                Image.asset('images/ic_foreground.png',
-                    width: 32, height: 32),
-                SizedBox(width: 12),
-                Text(
-                  'IIITB Hogwarts',
-                  textScaleFactor: 1.4,
-                )
-              ],
-            ),
-            content: Text('Is that it.. You want to exit the app?'),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  child: Text('NO')
-              ),
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: Text('YES')
-              ),
-            ],
-          ));
+          builder: (context) =>
+              AlertDialog(
+                backgroundColor: Color(0xFF480945),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 8, horizontal: 24),
+                title: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('images/ic_foreground.png',
+                        width: 32, height: 32),
+                    SizedBox(width: 12),
+                    Text(
+                      'IIITB Hogwarts',
+                      textScaleFactor: 1.4,
+                    )
+                  ],
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Divider(color: Theme
+                        .of(context)
+                        .accentColor
+                        .withOpacity(0.5)),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Is that it.. You want to exit the app?'),
+                    ),
+                  ],
+                ),
+                actions: [
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                      child: Text('NO')
+                  ),
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      child: Text('YES')
+                  ),
+                ],
+              ));
     }
 
-    final user = Provider.of<User>(context);
     return WillPopScope(
       onWillPop: onBackPressed,
       child: Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          elevation: 4,
-          backgroundColor: Color(0xFF480945),
-          title: Text(fragmentTitles[selectedFragment]),
-          centerTitle: true,
-          leading: IconButton(
-            icon: Image.asset('images/ic_drawer.png', height: 24, width: 24,),
-            onPressed: () => scaffoldKey.currentState.openDrawer(),
+          key: scaffoldKey,
+          appBar: AppBar(
+            elevation: 4,
+            backgroundColor: Color(0xFF480945),
+            title: Text(fragmentTitles[selectedFragment]),
+            centerTitle: true,
+            leading: IconButton(
+              icon: Image.asset(
+                'images/ic_drawer.png', height: 24, width: 24,),
+              onPressed: () => scaffoldKey.currentState.openDrawer(),
+            ),
           ),
-        ),
-        drawer: drawer(),
-        body: fragments[selectedFragment]
+          drawer: drawer(),
+          body: FutureBuilder(
+              future: data.init(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting)
+                  return Scaffold(
+                      body: Center(child: CircularProgressIndicator()));
+                else if (snapshot.hasData && snapshot.data) {
+                  return StreamBuilder(
+                    stream: tabs,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData)
+                        return fragments[0];
+                      return fragments[snapshot.data];
+                    },
+                  );
+                }
+                return Center(child: Text(snapshot.error.toString(), textAlign: TextAlign.center));
+              }
+          )
       ),
     );
   }

@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:iiitb_hogwarts/models/group.dart';
+import 'package:iiitb_hogwarts/screens/fragments/landing_page.dart';
 import 'package:iiitb_hogwarts/utils/important_strings.dart';
 
 class LeaderBoardBadge extends StatelessWidget {
 
-  final int groupCode;
-  LeaderBoardBadge({@required this.groupCode});
+  final Group group;
+  LeaderBoardBadge({@required this.group});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return LandingPage(type: 'group', model: group);
+        }));
+      },
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(GROUP_LOGOS[groupCode]),
+            image: NetworkImage(group.groupLogo),
             fit: BoxFit.cover
           ),
         ),
@@ -35,7 +41,7 @@ class LeaderBoardBadge extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Text(
-                GROUP_NAMES[groupCode],
+                group.name,
                 style: TextStyle(fontSize: 20),
               ),
               Icon(Icons.arrow_forward_ios_rounded, color: Colors.white,)

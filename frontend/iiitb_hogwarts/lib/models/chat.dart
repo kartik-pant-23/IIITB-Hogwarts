@@ -5,23 +5,25 @@ import 'package:provider/provider.dart';
 class Chat {
 
   String userId, name, message;
-  BuildContext _context;
 
-  Chat({BuildContext context}) {
-    this._context = context;
+  Chat({this.userId, this.name, this.message});
+
+  Chat.fromJson(jsonObject) {
+    this.userId = jsonObject['user_id'];
+    this.name = jsonObject['name'];
+    this.message = jsonObject['message'];
   }
 
-  fromJson(jsonObject) {
-    userId = jsonObject['userId'];
-    name = jsonObject['name'];
-    message = jsonObject['message'];
+  Map<String, String> toJson() {
+    return {
+      'user_id': this.userId,
+      'name': this.name,
+      'message': this.message
+    };
   }
 
-  // Check if the message is from the user himself/ herself
-  int getType() {
-    /*String thisUserId = Provider.of<User>(_context).userId;
-    return (thisUserId==userId) ?1 :0;*/
-    return (userId=='akhskabxcywb1921y78sgqsb') ?1 :0;
+  int getType(String currentUser) {
+    return (this.userId==currentUser) ?1 :0;
   }
 
 }

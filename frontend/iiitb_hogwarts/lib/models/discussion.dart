@@ -1,18 +1,23 @@
-class Discussion {
+import 'package:iiitb_hogwarts/models/chat.dart';
 
+class Discussion {
+  String id;
   String bannerUrl;
   String title;
-  String joinCount;
+  List<Chat> chat;
 
-  Discussion({
-    this.bannerUrl,
-    this.title,
-    this.joinCount});
+  Discussion({this.id, this.bannerUrl, this.title, this.chat});
 
   Discussion.fromJson(jsonObject) {
-    this.bannerUrl=jsonObject['banner_url'];
-    this.title=jsonObject['title'];
-    this.joinCount=jsonObject['join_count'];
-  }
+    this.id = jsonObject['_id'];
+    this.bannerUrl = jsonObject['banner_url'];
+    this.title = jsonObject['discussion_title'];
 
+    var chatData = jsonObject['chat'];
+    this.chat = List();
+    for(int i=0; i<chatData.length; i++) {
+      Chat chatItem = Chat.fromJson(chatData[i]);
+      chat.add(chatItem);
+    }
+  }
 }

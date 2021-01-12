@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:iiitb_hogwarts/models/group.dart';
 import 'package:iiitb_hogwarts/utils/important_strings.dart';
-import 'package:iiitb_hogwarts/widgets/group_badge.dart';
 
 class GroupScreenHeader extends StatelessWidget {
+
+  final Group group;
+  GroupScreenHeader({@required this.group});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage(GROUP_LOGOS[2]),
+            image: NetworkImage(group.groupLogo),
             fit: BoxFit.cover
         ),
         boxShadow: [BoxShadow(
@@ -24,8 +28,8 @@ class GroupScreenHeader extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(GROUP_NAMES[2], style: TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 2),
-            Text(GROUP_TAGLINES[2], textScaleFactor: 1, textAlign: TextAlign.center),
+            Text(group.name, style: TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 2),
+            Text(group.tagline ?? '', textScaleFactor: 1, textAlign: TextAlign.center),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Divider(color: Colors.white),
@@ -36,14 +40,14 @@ class GroupScreenHeader extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('MEMBERS', textScaleFactor: 1),
-                    Text('74', textScaleFactor: 2, style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('${group.numOfMembers ?? '-'}', textScaleFactor: 2, style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 )),
                 Expanded(child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('CURRENT SCORE', textScaleFactor: 1),
-                    Text('1034', textScaleFactor: 2, style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('${group.groupScore ?? '-'}', textScaleFactor: 2, style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ))
               ],
