@@ -19,6 +19,14 @@ const groupSchema = new Schema({
     group_score: {
       type: Number,
       default: 0
+    },
+    chat: {
+      type: Array, 
+      default:[]
+    },
+    group_logo: {
+      type: String,
+      required: true
     }
     // legacySpell: {
     //   type: String,

@@ -20,6 +20,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+const io = require("socket.io")(server, {transports: ['websocket']});
+const chatHandler = require("../routes/chat_controller")
+
+io.on('connection', chatHandler.init_chat)
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -30,14 +30,14 @@ const UserSchema = new Schema({
         default: false
     },
     score: { type: Number, default: 0 },
-    about: { type: String },
-    id_facebook: { type: String },
-    id_instagram: { type: String },
-    id_linkedin: { type: String },
-    id_github: { type: String },
-    id_twitter: { type: String },
-    id_youtube: { type: String },
-    id_personal: { type: String },
+    about: { type: String, default: '' },
+    id_facebook: { type: String, default: '' },
+    id_instagram: { type: String, default: '' },
+    id_linkedin: { type: String, default: '' },
+    id_github: { type: String, default: '' },
+    id_twitter: { type: String, default: '' },
+    id_youtube: { type: String, default: '' },
+    id_personal: { type: String, default: '' },
 })
 
 

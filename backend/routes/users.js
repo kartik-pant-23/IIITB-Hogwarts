@@ -1,6 +1,33 @@
 var express = require('express');
 var router = express.Router();
 const Users = require('../models/user');
+const Groups = require("../models/group")
+
+// GET the current user along with group chat item
+router.get('/', (req, res) => {
+  Users.findOne({_id: req.get('user_id')}).exec()
+  .then((user) => {
+    Groups.findOne({_id: user['group']}).select('chat').exec()
+    .then((chat) => {
+      res.status(200).json({
+        user: user,
+        chat_data: chat['chat']
+      })
+    })
+    .catch((error) => {
+      res.status(error.status || 500).json({
+        message: error.message || "Unknown error!",
+        error: error
+      })
+    })
+  })
+  .catch((error) => {
+    res.status(error.status || 500).json({
+      message: error.message || "Unknown error!",
+      error: error
+    })
+  })
+})
 
 /* GET users listing only of the particular group */
 router.get('/:groupId', function(req, res, next) {

@@ -1,31 +1,58 @@
 const express = require("express");
-const multer  = require("multer");
-const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 
 const Blog = require("../models/blogs");
 
-/* GET Blog posting form */
-// Remember to include enctype in the form as below:
-// <form action="/blogs" method="post" enctype="multipart/form-data">
-//   <input type="file" name="avatar" />
-// </form>
+router.get('/', (req, res) => {
+  Blog.find().sort({_id: -1}).exec()
+  .then((docs) => {
+    res.status(200).json({
+      message: "Successful!",
+      count: docs.length,
+      data: docs
+    })
+  })
+  .catch((error) => {
+    res.status(error.status || 500).json({
+      message: error.message || "Unknown error!",
+      error: error
+    })
+  })
+})
 
 //Store the blog in the database
-router.post("/blogs", upload.single("avatar"), function(req, res) {
+router.post("/addBlog", function(req, res) {
+
+  const {
+    blog_title, 
+    blog_url, 
+    banner_url, 
+    author_name, 
+    author_year, 
+    author_uid} = req.body
 
   const blog = new Blog({
-      title: req.body.title,
-      content: req.body.content,
-      img: req.file
+      blog_title: blog_title,
+      blog_url: blog_url,
+      banner_url: banner_url,
+      author_name: author_name,
+      author_year: author_year,
+      author_uid: author_uid
   });
 
-  blog.save(function (err, blog){
-    if (err) {
-      return res.statusCode(500);
-    }
-    return res.statusCode(200);
-  });
+  blog.save()
+  .then((blog) => {
+    res.status(200).json({
+      message: 'Blog saved successfully!',
+      data: blog
+    })
+  })
+  .catch((error) => {
+    res.status(error.status || 500).json({
+      message: error.message || 'Unknown error!',
+      error: error
+    })
+  })
 
 });
 
