@@ -1,16 +1,12 @@
 class Blog {
-  String bannerUrl = "https://media.geeksforgeeks.org/img-practice/banner/java-app-development-thumbnail-old.png";
-  String blogUrl = "https://practice.geeksforgeeks.org/courses/java-app-development";
-  String blogTitle = "Android App Development";
-  String authorName = "Kartik Pant";
-  String authorYear = "2nd Year, CSE";
+  String bannerUrl;
+  String blogUrl;
+  String blogTitle;
+  String authorName;
+  String authorYear;
+  String authorUid;
 
-  /*Blog({
-    this.bannerUrl,
-    this.blogUrl,
-    this.authorName,
-    this.authorYear});*/
-  Blog();
+  Blog({this.blogTitle, this.blogUrl, this.bannerUrl, this.authorName, this.authorYear, this.authorUid});
 
   Blog.fromJson(jsonObject) {
     this.bannerUrl = jsonObject['banner_url'];
@@ -18,5 +14,16 @@ class Blog {
     this.blogTitle = jsonObject['blog_title'];
     this.authorName = jsonObject['author_name'];
     this.authorYear = jsonObject['author_year'];
+  }
+
+  Map<String, String> toJson() {
+    return {
+      "blog_url": this.blogUrl,
+      "banner_url": this.bannerUrl,
+      "blog_title": this.blogTitle,
+      "author_name": this.authorName,
+      "author_year": this.authorYear,
+      "author_uid": this.authorUid,
+    };
   }
 }

@@ -14,8 +14,8 @@ class CustomCard extends StatelessWidget {
       margin: const EdgeInsets.all(12.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-          color: Color(0xFFDF267C).withOpacity(0.30),
-          boxShadow: [BoxShadow(color: Color(0x55000000), blurRadius: 8)]),
+          color: /*Color(0xFFDF267C).withOpacity(0.30)*/Color(0xFF480945),
+          boxShadow: [BoxShadow(color: Color(0x55000000), blurRadius: 8, offset: Offset(4,4))]),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -84,7 +84,7 @@ class _ProfileState extends State<Profile> {
                 flex: 1,
                 child: AspectRatio(
                   aspectRatio: 4 / 3,
-                  child: Image.asset(GROUP_LOGOS[0], fit: BoxFit.cover),
+                  child: Image.asset('', fit: BoxFit.cover),
                 ),
               ),
               SizedBox(width: 8),
@@ -100,7 +100,7 @@ class _ProfileState extends State<Profile> {
                       TextSpan(
                           text: 'Member of ', style: TextStyle(fontSize: 20)),
                       TextSpan(
-                          text: GROUP_NAMES[0],
+                          text: '',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 24))
                     ]))

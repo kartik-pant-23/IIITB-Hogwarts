@@ -46,12 +46,13 @@ class _ShowGroupState extends State<ShowGroup> with SingleTickerProviderStateMix
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GroupBadge(width: 300,
+                    // Show group details accordingly
+                    /*GroupBadge(width: 300,
                       image: GROUP_LOGOS[0],),
                     Text(GROUP_NAMES[0], style: Theme.of(context).textTheme.headline5, textScaleFactor: 2.5,),
                     Text(GROUP_TAGLINES[0],
                       textScaleFactor: 1, textAlign: TextAlign.center,
-                    ),
+                    ),*/
                     SizedBox(height: 50),
                     FadeTransition(
                       opacity: _controller,

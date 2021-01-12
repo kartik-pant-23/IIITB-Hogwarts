@@ -88,7 +88,7 @@ class ContributorBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
         decoration: BoxDecoration(
           color: Color(0xFFDF267C).withOpacity(0.30),
           borderRadius: BorderRadius.circular(8),

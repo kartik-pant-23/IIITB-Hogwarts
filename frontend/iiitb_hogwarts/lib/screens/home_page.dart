@@ -255,7 +255,12 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             elevation: 4,
             backgroundColor: Color(0xFF480945),
-            title: Text(fragmentTitles[selectedFragment]),
+            title: StreamBuilder(
+              stream: tabs,
+              builder: (context, snapshot) {
+                return Text(fragmentTitles[(snapshot.hasData) ?snapshot.data :0]);
+              }
+            ),
             centerTitle: true,
             leading: IconButton(
               icon: Image.asset(
