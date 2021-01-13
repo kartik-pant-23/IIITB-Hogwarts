@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/chat.dart';
+import 'package:iiitb_hogwarts/services/chat_handler.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';
 import 'package:iiitb_hogwarts/widgets/chat_item.dart';
 import 'package:iiitb_hogwarts/widgets/group_screen_header.dart';
@@ -21,63 +22,15 @@ class _ChatRoomState extends State<ChatRoom> {
   Stream msgStream;
   StreamController controller;
 
-  IO.Socket socket = IO.io(
-    'http://192.168.18.8:3000',
-    <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true,
-      'forceNew': true,
-    },
-  );
-
   @override
   void initState() {
-    socket.emit('joinRoom', 'Kartik');
-
-    Chat chat1 = Chat.fromJson({
-      'userId': 'akhskabxcywb1921y78sgqsb',
-      'name': 'Kartik',
-      'message': 'Routes kbb bnake doge be??'
-    });
-
-    //connectChatServer();
-
-    chatData.add(chat1);
-    chat1 = Chat.fromJson({
-      'userId': 'akhskabxcywb1921y78',
-      'name': 'Prashant',
-      'message': 'Aise immediate nhi sochein hn.. sochenge.'
-    });
-    chatData.add(chat1);
-    chat1 = Chat.fromJson({
-      'userId': 'akhskabxcywb19218',
-      'name': 'Tushar',
-      'message': 'Egjaktly!!'
-    });
-    chatData.add(chat1);
     controller = StreamController();
     msgStream = controller.stream;
     super.initState();
   }
 
-  void connectChatServer() {
-    try {
-      String chatUrl = 'http://192.168.18.8:3000';
-      print("Tried connecting $chatUrl");
-      IO.Socket socket = IO.io(chatUrl, <String, dynamic>{
-        'transports': ['websocket'],
-        'autoConnect': false,
-      });
-      socket.connect();
-      socket.emit('/test', 'test');
-    }catch(e) {
-      print("SocketConnection: "+e.toString());
-    }
-  }
-
   @override
   void dispose() {
-    socket.close();
     controller.close();
     super.dispose();
   }
@@ -154,13 +107,7 @@ class _ChatRoomState extends State<ChatRoom> {
                         color: Color(0xFFDF267C)),
                     onTap: () {
                       if(textController.text!=null && textController.text.trim()!='') {
-                        Chat chat = Chat.fromJson({
-                          'userId': 'akhskabxcywb1921y78sgqsb',
-                          'name': 'Kartik',
-                          'message': textController.text.trim()
-                        });
                         textController.clear();
-                        chatData.add(chat);
                         controller.add(chatData);
                       }
                     })

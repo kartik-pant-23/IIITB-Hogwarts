@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/screens/fragments/chat_room.dart';
 import 'package:iiitb_hogwarts/screens/fragments/group.dart';
 import 'package:iiitb_hogwarts/screens/fragments/profile.dart';
+import 'package:iiitb_hogwarts/screens/fragments/user_profile.dart';
 
 class LandingPage extends StatelessWidget {
 
@@ -24,7 +25,8 @@ class LandingPage extends StatelessWidget {
           return GroupInfo(group: model);
           break;
         case 'user_profile':
-          return Profile();
+          // TODO - Send userId of current user
+          return (model.isCurrentUser('')) ?Profile() :UserProfile(user: model);
           break;
         case 'chat':
           return ChatRoom();

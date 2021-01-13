@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/group.dart';
 import 'package:iiitb_hogwarts/models/user.dart';
+import 'package:iiitb_hogwarts/screens/fragments/landing_page.dart';
 import 'package:iiitb_hogwarts/services/load_data.dart';
 import 'package:iiitb_hogwarts/widgets/group_screen_header.dart';
 
@@ -16,44 +17,9 @@ class GroupInfo extends StatefulWidget {
 }
 
 class _GroupInfoState extends State<GroupInfo> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    Widget userTile({User user}) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(user.name ?? '-', textScaleFactor: 1.4),
-                  Visibility(
-                    visible: user.about.isNotEmpty,
-                    child: Text(user.about ?? '-',
-                        textScaleFactor: 1.2, overflow: TextOverflow.ellipsis),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: 12),
-            Text('${user.score ?? '0'}', textScaleFactor: 1.6),
-            SizedBox(width: 12),
-            Icon(Icons.chevron_right, color: Colors.white)
-          ],
-        ),
-      );
-    }
 
     return NestedScrollView(
         floatHeaderSlivers: true,
@@ -78,7 +44,33 @@ class _GroupInfoState extends State<GroupInfo> {
                     padding: const EdgeInsets.all(8),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return userTile(user: snapshot.data[index]);
+                      return ListTile(
+                        onTap: () {
+                          snapshot.data[index].group = widget.group;
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                            return LandingPage(type: 'user_profile', model: snapshot.data[index]);
+                          }));
+                        },
+                        title: Text(snapshot.data[index].name),
+                        subtitle: Visibility(
+                          visible: snapshot.data[index].about.isNotEmpty,
+                          child: Text(snapshot.data[index].about ?? '-',
+                              textScaleFactor: 1.2,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        leading: CircleAvatar(
+                          backgroundColor: Color(0xFFDF267C),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${snapshot.data[index].score}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        trailing:
+                            Icon(Icons.chevron_right, color: Colors.white),
+                      );
                     });
               }
               return Center(child: Text(snapshot.error.toString()));

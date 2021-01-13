@@ -1,9 +1,11 @@
+import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:provider/provider.dart';
 
 class Group {
 
   String id, name, groupLogo, tagline;
   int groupScore, numOfMembers;
+  List<User> members;
 
   Group({this.id, this.name, this.groupLogo, this.tagline, this.groupScore, this.numOfMembers});
 

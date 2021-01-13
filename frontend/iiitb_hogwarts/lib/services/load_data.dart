@@ -52,6 +52,14 @@ class DataLoader {
 
   Future<List<User>> getUsersList(Group group) async {
     try {
+      HomePageData homePageData = HomePageData();
+      int index;
+      for(index=0; index<homePageData.groups.length; index++) {
+        if(homePageData.groups[index].id == group.id) {
+          if(homePageData.groups[index].members != null) return homePageData.groups[index].members;
+          break;
+        }
+      }
       Uri uri = Uri.https(BASE_URL, '$GROUPS/${group.id}');
       var response = await http.get(uri);
       if(response.statusCode != 200) {
@@ -70,10 +78,36 @@ class DataLoader {
         usersList.add(user);
       }
 
+      homePageData.groups[index].members = usersList;
       return usersList;
 
     } catch(err) {
       print("LoadingUsersList: "+err.toString());
+      return null;
+    }
+  }
+
+  Future<User> loadUserData(String userId) async {
+    try {
+      Uri uri = Uri.https(BASE_URL, 'USERS/$userId');
+      var response = await http.get(uri);
+      if(response.statusCode!=200) {
+        print('LoadingUserFailed: '+response.body);
+        return null;
+      }
+      var userData = jsonDecode(response.body)['data'];
+      User user = User.fromJson(userData);
+
+      user.blogs = List();
+      var _blogsData = jsonDecode(response.body)['blogs'] ?? {};
+      for(int i=0; i<_blogsData.length; i++) {
+        Blog blog = Blog.fromJson(_blogsData[i]);
+        user.blogs.add(blog);
+      }
+
+      return user;
+    } catch(err) {
+      print('LoadingUserError: '+err.toString());
       return null;
     }
   }

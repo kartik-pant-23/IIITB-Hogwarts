@@ -11,6 +11,7 @@ import 'package:iiitb_hogwarts/screens/fragments/feedback.dart';
 import 'package:iiitb_hogwarts/screens/fragments/get_featured.dart';
 import 'package:iiitb_hogwarts/screens/fragments/group.dart';
 import 'package:iiitb_hogwarts/screens/fragments/profile.dart';
+import 'package:iiitb_hogwarts/screens/fragments/user_profile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

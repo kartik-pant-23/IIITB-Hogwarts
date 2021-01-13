@@ -24,7 +24,7 @@ class CustomCard extends StatelessWidget {
             children: [
               Expanded(child: Divider(color: Colors.white, thickness: 1.5)),
               SizedBox(width: 2),
-              Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(title, textScaleFactor: 1.7,),
               SizedBox(width: 2),
               Expanded(child: Divider(color: Colors.white, thickness: 1.5)),
             ],

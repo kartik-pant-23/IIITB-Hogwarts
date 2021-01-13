@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SocialMediaBadge extends StatelessWidget {
 
-  final String handle;
-  SocialMediaBadge({@required this.handle});
+  final String handle, link;
+  SocialMediaBadge({@required this.handle, @required this.link});
 
   final Map<String, String> availableHandles = {
     "Facebook": "images/facebook_badge.png",
@@ -17,16 +18,28 @@ class SocialMediaBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 4),
-      decoration: BoxDecoration(
-        boxShadow: [BoxShadow(
-          color: Color(0x55000000),
-          blurRadius: 6
-        )],
-        borderRadius: BorderRadius.circular(2)
+    return GestureDetector(
+      onTap: () async {
+        if (await canLaunch(link)) {
+          await launch(link);
+        } else {
+          throw 'Could not launch $link';
+        }
+      },
+      child: Visibility(
+        visible: link.isNotEmpty,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 4),
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(
+              color: Color(0x55000000),
+              blurRadius: 6
+            )],
+            borderRadius: BorderRadius.circular(2)
+          ),
+          child: Image.asset(availableHandles[handle]),
+        ),
       ),
-      child: Image.asset(availableHandles[handle]),
     );
   }
 }
