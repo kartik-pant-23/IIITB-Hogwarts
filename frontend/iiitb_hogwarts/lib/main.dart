@@ -1,6 +1,5 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:iiitb_hogwarts/models/home_page_data.dart';
 import 'package:iiitb_hogwarts/screens/home_page.dart';
 import 'package:iiitb_hogwarts/screens/login_page.dart';
 import 'package:iiitb_hogwarts/services/current_user.dart';

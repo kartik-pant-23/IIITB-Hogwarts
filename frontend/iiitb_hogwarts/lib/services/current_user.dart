@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:http/http.dart' as http;
-import 'package:iiitb_hogwarts/services/admob.dart';
 import 'package:iiitb_hogwarts/utils/important_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,7 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:iiitb_hogwarts/models/user.dart';
-import 'package:provider/provider.dart';
-
 class Chat {
 
   String userId, name, message;

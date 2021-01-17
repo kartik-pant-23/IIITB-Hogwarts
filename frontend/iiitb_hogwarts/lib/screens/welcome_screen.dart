@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:iiitb_hogwarts/screens/show_group.dart';
 import 'package:iiitb_hogwarts/widgets/background_image.dart';
-import 'package:iiitb_hogwarts/widgets/transition.dart';
 import 'package:provider/provider.dart';
 
 class WelcomePage extends StatefulWidget {

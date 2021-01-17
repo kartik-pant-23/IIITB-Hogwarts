@@ -22,11 +22,11 @@ class CustomCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: Divider(color: Colors.white, thickness: 1.5)),
+              Expanded(flex: 1,child: Divider(color: Colors.white54, thickness: 1.5)),
               SizedBox(width: 2),
-              Text(title, textScaleFactor: 1.7,),
+              Text(title, textScaleFactor: 1.7, style: TextStyle(color: Colors.white54)),
               SizedBox(width: 2),
-              Expanded(child: Divider(color: Colors.white, thickness: 1.5)),
+              Expanded(flex: 10,child: Divider(color: Colors.white54, thickness: 1.5)),
             ],
           ),
           SizedBox(height: 8),

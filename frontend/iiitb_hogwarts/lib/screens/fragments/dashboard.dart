@@ -1,13 +1,11 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:iiitb_hogwarts/models/blog.dart';
 import 'package:iiitb_hogwarts/models/home_page_data.dart';
 import 'package:iiitb_hogwarts/services/admob.dart';
 import 'package:iiitb_hogwarts/widgets/blogs_banner.dart';
 import 'package:iiitb_hogwarts/widgets/discussion_banner.dart';
 import 'package:iiitb_hogwarts/widgets/leaderboard_badge.dart';
 import 'package:iiitb_hogwarts/widgets/website_banner.dart';
-import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
   @override

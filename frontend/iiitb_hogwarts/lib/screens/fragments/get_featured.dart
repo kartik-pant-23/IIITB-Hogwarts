@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -174,20 +174,28 @@ class _GetFeaturedState extends State<GetFeatured> {
           stream: alertController.stream,
           builder: (context, snapshot) {
             if(snapshot.hasData) {
-              return AlertDialog(
-                backgroundColor: Color(0xFF480945),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 48),
-                content: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Visibility(
-                      visible: snapshot.data == 'Posting blog',
-                      child: CircularProgressIndicator(),
+              return BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                child: Container(
+                  height: double.infinity, width: double.infinity,
+                  alignment: Alignment.center,
+                  color: Color(0xFF480945).withOpacity(0.50),
+                  child: AlertDialog(
+                    backgroundColor: Color(0xFF480945),
+                    contentPadding: const EdgeInsets.all(12),
+                    content: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Visibility(
+                          visible: snapshot.data == 'Posting blog',
+                          child: CircularProgressIndicator(),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(child: Text(snapshot.data, textAlign: TextAlign.center, softWrap: true))
+                      ],
                     ),
-                    SizedBox(width: 8),
-                    Text(snapshot.data)
-                  ],
+                  ),
                 ),
               );
             }

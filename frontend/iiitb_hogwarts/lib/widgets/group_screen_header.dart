@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/group.dart';
-import 'package:iiitb_hogwarts/utils/important_strings.dart';
 
 class GroupScreenHeader extends StatelessWidget {
   final Group group;

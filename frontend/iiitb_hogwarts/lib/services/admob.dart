@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:admob_flutter/admob_flutter.dart';
-
 class AdmobAds {
 
   final String _bannerIdAndroid = "ca-app-pub-5494677257292197/8630944110";

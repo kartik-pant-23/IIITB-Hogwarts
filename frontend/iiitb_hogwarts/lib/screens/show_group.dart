@@ -1,13 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:iiitb_hogwarts/screens/home_page.dart';
-import 'package:iiitb_hogwarts/utils/important_strings.dart';
 import 'package:iiitb_hogwarts/widgets/background_image.dart';
-import 'package:iiitb_hogwarts/widgets/group_badge.dart';
 import 'package:iiitb_hogwarts/widgets/transition.dart';
-import 'package:provider/provider.dart';
 
 class ShowGroup extends StatefulWidget {
   @override

@@ -32,6 +32,7 @@ class LandingPage extends StatelessWidget {
           return ChatRoom();
           break;
       }
+      return Container();
     }
 
     return Scaffold(

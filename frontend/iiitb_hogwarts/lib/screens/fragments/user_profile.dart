@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:iiitb_hogwarts/services/admob.dart';
 import 'package:iiitb_hogwarts/services/load_data.dart';
-import 'package:iiitb_hogwarts/utils/important_strings.dart';
 import 'package:iiitb_hogwarts/widgets/iiitb_hogwarts_card.dart';
 import 'package:iiitb_hogwarts/widgets/social_media_badge.dart';
 import 'package:url_launcher/url_launcher.dart';

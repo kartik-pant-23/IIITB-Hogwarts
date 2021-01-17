@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/models/group.dart';
-import 'package:iiitb_hogwarts/models/user.dart';
 import 'package:iiitb_hogwarts/screens/fragments/landing_page.dart';
 import 'package:iiitb_hogwarts/services/load_data.dart';
 import 'package:iiitb_hogwarts/widgets/group_screen_header.dart';

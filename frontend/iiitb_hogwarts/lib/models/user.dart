@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:iiitb_hogwarts/models/blog.dart';
-import 'package:iiitb_hogwarts/models/chat.dart';
 import 'package:iiitb_hogwarts/models/group.dart';
+import 'package:provider/provider.dart';
 
 class User {
 
@@ -54,6 +55,10 @@ class User {
   // Tells if it is the current user
   bool isCurrentUser(String userId) {
     return (this.userId==userId);
+  }
+
+  User getCurrentUser(BuildContext context) {
+    return Provider.of<User>(context);
   }
 
 }

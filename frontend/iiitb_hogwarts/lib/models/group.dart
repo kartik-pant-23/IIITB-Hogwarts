@@ -1,5 +1,4 @@
 import 'package:iiitb_hogwarts/models/user.dart';
-import 'package:provider/provider.dart';
 
 class Group {
 

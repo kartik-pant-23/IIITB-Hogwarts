@@ -2,6 +2,7 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:iiitb_hogwarts/services/admob.dart';
 import 'package:iiitb_hogwarts/widgets/iiitb_hogwarts_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedbackScreen extends StatelessWidget {
 
@@ -51,7 +52,15 @@ class FeedbackScreen extends StatelessWidget {
                     return;
                   }
                   _formKey.currentState.save();
-                  print('{Feedback: $_feedback}');
+                  Uri emailUri = Uri(
+                      scheme: 'mailto',
+                      path: 'osatiiitb2019@gmail.com',
+                      queryParameters: {
+                        'subject': 'Feedback for IIITB Hogwarts',
+                        'body': _feedback
+                      }
+                  );
+                  launch(emailUri.toString().replaceAll('+', '%20'));
                   _formKey.currentState.reset();
                 },
               ),
