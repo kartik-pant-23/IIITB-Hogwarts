@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const mongoose = require('mongoose');
 
 const User = require("../models/user");
+const Groups = require("../models/group")
 
 const groupNames = [
   mongoose.Types.ObjectId("5ff7359e2146903eb88f59fb"),
@@ -20,23 +21,25 @@ router.get("/", function (req, res, next) {
 
 /* register the user in database */
 router.post("/", function (req, res) {
-  g0 = groupNames[0].numOfMembers;
-  g1 = groupNames[1].numOfMembers;
-  g2 = groupNames[2].numOfMembers;
-  g3 = groupNames[3].numOfMembers;
-  minimum = Math.min(g0,g1,g2,g3);//Math.floor(Math.random() % 4);
-  if(minimum==g0){
+  let g0 = await Groups.findOne({ _id: groupNames[0] });
+  let g1 = await Groups.findOne({ _id: groupNames[1] });
+  let g2 = await Groups.findOne({ _id: groupNames[2] });
+  let g3= await Groups.findOne({ _id: groupNames[3] });
+  
+  minimum = Math.min(g0.numOfMembers,g1.numOfMembers,g2.numOfMembers,g3.numOfMembers);//Math.floor(Math.random() % 4);
+  if(minimum==g0.numOfMembers){
     groupNum = 0;
   }
-  else if(minimum==g0){
+  else if(minimum==g1.numOfMembers){
     groupNum = 1;
   }
-  else if(minimum==g0){
+  else if(minimum==g2.numOfMembers){
     groupNum = 2;
   }
   else {
     groupNum=3;
   }
+
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -45,6 +48,13 @@ router.post("/", function (req, res) {
     isVerified: false,
     token: crypto.randomBytes(16).toString("hex"),
   })
+
+  //to update the Groups data.
+  const filter = { _id: groupNames[groupNum] };
+  const update = { noOfMembers: minimum+1 };
+  let updatedGroup =await Groups.findOneAndUpdate(filter, update, {
+    new: true
+  });
 
   user.save(function (err, user) {
     if (!err) {
