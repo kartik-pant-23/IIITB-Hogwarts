@@ -20,8 +20,23 @@ router.get("/", function (req, res, next) {
 
 /* register the user in database */
 router.post("/", function (req, res) {
-  groupNum = Math.floor(Math.random() % 4);
-
+  g0 = groupNames[0].numOfMembers;
+  g1 = groupNames[1].numOfMembers;
+  g2 = groupNames[2].numOfMembers;
+  g3 = groupNames[3].numOfMembers;
+  minimum = Math.min(g0,g1,g2,g3);//Math.floor(Math.random() % 4);
+  if(minimum==g0){
+    groupNum = 0;
+  }
+  else if(minimum==g0){
+    groupNum = 1;
+  }
+  else if(minimum==g0){
+    groupNum = 2;
+  }
+  else {
+    groupNum=3;
+  }
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -29,7 +44,7 @@ router.post("/", function (req, res) {
     group: groupNames[groupNum], //Decide later the algorithm.. Currently it is random
     isVerified: false,
     token: crypto.randomBytes(16).toString("hex"),
-  });
+  })
 
   user.save(function (err, user) {
     if (!err) {
